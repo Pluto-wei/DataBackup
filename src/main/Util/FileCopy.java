@@ -63,15 +63,21 @@ public class FileCopy {
         // 新建
         if(!target.exists()){
             target.mkdir();
+            //target.mkdirs();
         }
-        for(String fileUrl : filesUrl){
-            String tmp1 = sourceUrl + File.separator + fileUrl;
-            String tmp2 = targetUrl + File.separator + fileUrl;
-            if(new File(tmp1).isDirectory()){
-                copyDir(tmp1, tmp2);//递归调用
-            }else{
-                copyFile(tmp1, tmp2); // 直接拷贝文件
+        if(filesUrl==null){
+            System.out.println("not dir");
+        }else{
+            for(String fileUrl : filesUrl){
+                String tmp1 = sourceUrl + File.separator + fileUrl;
+                String tmp2 = targetUrl + File.separator + fileUrl;
+                if(new File(tmp1).isDirectory()){
+                    copyDir(tmp1, tmp2);//递归调用
+                }else{
+                    copyFile(tmp1, tmp2); // 直接拷贝文件
+                }
             }
         }
+
     }
 }

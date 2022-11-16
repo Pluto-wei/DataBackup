@@ -165,7 +165,7 @@ public class FileModel{
                 FileCopy.copyDir(s, pos + File.separator + tmp.getName());
             }
         }
-        copySources.clear();
+        copySources.clear();//清空copy地址
         updateModels(currentFile);
     }
 

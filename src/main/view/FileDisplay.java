@@ -16,8 +16,8 @@ public class FileDisplay extends JList {
     private JPopupMenu filePopupMenu; // 文件菜单
     private JPopupMenu dictPopupMenu; // 目录菜单
 
-    private JMenuItem backupItem; // 拷贝菜单项
-    private JMenuItem restoreItem; // 加密菜单项
+    private JMenuItem backupItem; // 备份菜单项
+    private JMenuItem restoreItem; // 恢复菜单项
     private JMenuItem copyItem; // 拷贝菜单项
     private JMenuItem encodeItem; // 加密菜单项
     private JMenuItem decodeItem; // 解密菜单项

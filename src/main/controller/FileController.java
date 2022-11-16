@@ -66,7 +66,7 @@ public class FileController {
             List<File> valuesList = fileDisplay.getSelectedValuesList();
             String pos = JOptionPane.showInputDialog("please input the position to backup");
             fileModel.addCopySources(valuesList); // copy
-            fileModel.clearDir(pos);
+            //fileModel.clearDir(pos); 不清空备份文件夹
             fileModel.paste(pos);
             fileDisplay.updateView(fileModel.getDefaultListModel()); // 更新视图
         }
@@ -83,7 +83,7 @@ public class FileController {
             List<File> valuesList = fileDisplay.getSelectedValuesList();
             String pos = JOptionPane.showInputDialog("please input the position to restore");
             fileModel.addCopySources(valuesList); // copy
-            fileModel.clearDir(pos);
+            //fileModel.clearDir(pos);
             fileModel.paste(pos);
             fileDisplay.updateView(fileModel.getDefaultListModel()); // 更新视图
         }
