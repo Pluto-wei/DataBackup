@@ -71,10 +71,13 @@ public class FileController {
             @SuppressWarnings("unchecked")
             List<File> valuesList = fileDisplay.getSelectedValuesList();
             String pos = JOptionPane.showInputDialog("please input the position to backup");
+            String fileType = JOptionPane.showInputDialog("please input the file type to backup");
+            String fileName = JOptionPane.showInputDialog("please input the file name to backup");
             fileModel.addCopySources(valuesList); // copy
             //fileModel.clearDir(pos); 不清空备份文件夹
-            fileModel.paste(pos);
+            fileModel.paste(pos, fileType, fileName);
             fileDisplay.updateView(fileModel.getDefaultListModel()); // 更新视图
+            JOptionPane.showMessageDialog(null,"Finished");
         }
 
     }
