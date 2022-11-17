@@ -156,6 +156,22 @@ public class FileModel{
     /**
      * 剪切
      */
+    public void paste(String pos, String fileType, String fileName){
+        for(String s : copySources){
+            File tmp = new File(s);
+            if(tmp.isFile()) {
+                FileCopy.copyFile(s, pos + File.separator + tmp.getName(), fileType, fileName);
+            } else {
+                FileCopy.copyDir(s, pos + File.separator + tmp.getName(), fileType, fileName);
+            }
+        }
+        copySources.clear();
+        updateModels(currentFile);
+    }
+
+    /**
+     * 剪切
+     */
     public void paste(String pos){
         for(String s : copySources){
             File tmp = new File(s);

@@ -17,6 +17,7 @@ public class FileDisplay extends JList {
     private JPopupMenu dictPopupMenu; // 目录菜单
 
     private JMenuItem backupItem; // 备份菜单项
+    private JMenuItem backuptermlyItem; // 定时备份菜单项
     private JMenuItem restoreItem; // 恢复菜单项
     private JMenuItem copyItem; // 拷贝菜单项
     private JMenuItem encodeItem; // 加密菜单项
@@ -85,6 +86,7 @@ public class FileDisplay extends JList {
         filePopupMenu = new JPopupMenu();
         dictPopupMenu = new JPopupMenu();
         backupItem = new JMenuItem();
+        backuptermlyItem = new JMenuItem();
         restoreItem = new JMenuItem();
         copyItem = new JMenuItem();
         encodeItem = new JMenuItem();
@@ -101,6 +103,9 @@ public class FileDisplay extends JList {
         //---- styleMenuitem ----
         setMenuItemStyle(backupItem, "backup");
         filePopupMenu.add(backupItem);
+
+        setMenuItemStyle(backuptermlyItem, "backup_termly");
+        filePopupMenu.add(backuptermlyItem);
 
         setMenuItemStyle(restoreItem, "restore");
         filePopupMenu.add(restoreItem);
@@ -146,6 +151,9 @@ public class FileDisplay extends JList {
      */
     public void addBackupListener(ActionListener backup){
         backupItem.addActionListener(backup);
+    }
+    public void addBackuptermlyListener(ActionListener backuptermly){
+        backuptermlyItem.addActionListener(backuptermly);
     }
     public void addRestoreListener(ActionListener restore){
         restoreItem.addActionListener(restore);

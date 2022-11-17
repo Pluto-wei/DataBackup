@@ -12,12 +12,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class FileController {
     private FileDisplay fileDisplay; // 文件列表显示区
@@ -34,6 +39,7 @@ public class FileController {
         this.treeModel = treeModel;
         // 初始化添加事件监听
         fileDisplay.addBackupListener(new BackupListener());
+        fileDisplay.addBackuptermlyListener(new BackuptermlyListener());
         fileDisplay.addRestoreListener(new RestoreListener());
         fileDisplay.addCopyListener(new CopyListener());
         fileDisplay.addCreateListener(new CreateFileListener());
@@ -65,10 +71,43 @@ public class FileController {
             @SuppressWarnings("unchecked")
             List<File> valuesList = fileDisplay.getSelectedValuesList();
             String pos = JOptionPane.showInputDialog("please input the position to backup");
+            String fileType = JOptionPane.showInputDialog("please input the file type to backup");
+            String fileName = JOptionPane.showInputDialog("please input the file name to backup");
             fileModel.addCopySources(valuesList); // copy
             //fileModel.clearDir(pos); 不清空备份文件夹
-            fileModel.paste(pos);
+            fileModel.paste(pos, fileType, fileName);
             fileDisplay.updateView(fileModel.getDefaultListModel()); // 更新视图
+            JOptionPane.showMessageDialog(null,"Finished");
+        }
+
+    }
+    /**
+     * 定时备份事件监听类
+     */
+    class BackuptermlyListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            @SuppressWarnings("unchecked")
+            List<File> valuesList = fileDisplay.getSelectedValuesList();
+            String pos = JOptionPane.showInputDialog("please input the position to backup_termly");
+            String per = JOptionPane.showInputDialog("please input how often the automatic backup is performed (unit: minutes)");
+            fileModel.addCopySources(valuesList); // copy
+            //fileModel.clearDir(pos); 不清空备份文件夹
+            //定时拷贝
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    fileModel.paste(pos);
+                    fileDisplay.updateView(fileModel.getDefaultListModel());
+                    System.out.println("backup ok!");
+                    Date date = new Date(System.currentTimeMillis());
+                    System.out.println(formatter.format(date));
+                }
+            };
+            ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+            service.scheduleAtFixedRate(runnable,0,Integer.valueOf(per).longValue(), TimeUnit.MINUTES);
         }
 
     }
