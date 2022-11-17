@@ -119,7 +119,7 @@ public class FileController {
     }
 
     /**
-     * 解压事件类
+     * 解压监听类
      */
     class UnZipListener implements ActionListener{
         @Override
@@ -146,7 +146,7 @@ public class FileController {
     }
 
     /**
-     * 解包事件类
+     * 解包监听类
      */
     class UnTarListener implements ActionListener{
         @Override
@@ -211,7 +211,7 @@ public class FileController {
     }
 
     /**
-     * 解压事件类
+     * 解密事件类
      */
     class DecodeListener implements ActionListener{
         @Override

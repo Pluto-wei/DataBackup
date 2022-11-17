@@ -175,22 +175,26 @@ MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这
    2. 加密后得到新文件，删除原始文件，并将新文件重命名为原文件。（也可以不删除，防止出问题，重要文件）
    3. 解密的时候，与加密过程相同，输入密钥，读取文件，异或解密。
 
-9. ### **取消选中**
+9. ### **文件打包和解包**
+   1. 对于文件，直接打包。
+   2. 对于文件夹，递归打包。
+   
+10. ### **取消选中**
 
-   1. 重写`locationToIndex`函数，判断点击的位置是否有效
+    1. 重写`locationToIndex`函数，判断点击的位置是否有效
 
-      ```java
-      int index = super.locationToIndex(location);        
-      if (index != -1 && !getCellBounds(index, index).contains(location))	return -1;
-      ```
+       ```java
+       int index = super.locationToIndex(location);        
+       if (index != -1 && !getCellBounds(index, index).contains(location))	return -1;
+       ```
 
-10. ### **样式渲染**
+11. ### **样式渲染**
 
     1. 实现`FileListCellRenderer`类继承`DefaultListCellRenderer`
     2. 设置图标，设置显示信息，磁盘根目录使用`getPath()`，其他目录使用`getName()`。
     3. 选中设置颜色，取消选中恢复之前的颜色。
 
-11. ### **文件树展开**
+12. ### **文件树展开**
 
     1. 实现`TreeSelectionListener`接口，采用延迟加载，即每次点击展开时再加载目录文件。
 
