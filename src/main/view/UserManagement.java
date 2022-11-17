@@ -22,7 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
-//yonghu1 1
+//yonghu1 33
 public class UserManagement
 {
     private JFrame mainFrame = new JFrame("登录");
@@ -96,7 +96,8 @@ public class UserManagement
                         FileModel fileModel = new FileModel(); // file main.model
                         FileTreeModel treeModel = new FileTreeModel(); // file tree main.model
                         FileController fileController = new FileController(app, fileModel, treeModel); // file main.controller
-                        app.setVisible(true); // 可见
+                        app.setVisible(true); // app可见
+                        mainFrame.setVisible(false);//登录界面不可见
                     }
                     else{
                         JOptionPane.showConfirmDialog(null,
